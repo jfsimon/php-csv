@@ -15,11 +15,6 @@ class State
     private $enclosed;
 
     /**
-     * @var bool
-     */
-    private $escaped;
-
-    /**
      * @var string
      */
     private $currentCell;
@@ -35,7 +30,6 @@ class State
     public function __construct()
     {
         $this->enclosed    = false;
-        $this->escaped     = false;
         $this->currentCell = '';
         $this->currentRow  = array();
     }
@@ -65,27 +59,13 @@ class State
     }
 
     /**
-     * Writes "escaped" state.
+     * Returns true if current row is empty.
      *
-     * @param boolean $escaped
-     *
-     * @return State
+     * @return bool
      */
-    public function setEscaped($escaped)
+    public function isRowStart()
     {
-        $this->escaped = $escaped;
-
-        return $this;
-    }
-
-    /**
-     * Reads "escaped" state.
-     *
-     * @return boolean
-     */
-    public function isEscaped()
-    {
-        return $this->escaped;
+        return '' === $this->currentRow;
     }
 
     /**
@@ -122,8 +102,10 @@ class State
      */
     public function fetchRow()
     {
-        $this->currentRow[] = $this->currentCell;
+        $row   = $this->currentRow;
+        $row[] = $this->currentCell;
+        $this->currentRow = array();
 
-        return $this->currentRow;
+        return $row;
     }
 }

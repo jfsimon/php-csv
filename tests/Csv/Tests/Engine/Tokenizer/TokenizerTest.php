@@ -30,6 +30,16 @@ class TokenizerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($tokens), $index + 1);
     }
 
+    public function testTripleCase()
+    {
+        $tokenizer = new Tokenizer(',', new Enclosure('|', '|'));
+        $tokens = $tokenizer->tokenize('|-||-|||');
+
+        $this->assertTrue($tokens[0]->is(Token::ENCLOSURE_BOUNDARY));
+        $this->assertTrue($tokens[2]->is(Token::ENCLOSURE_ESCAPED_BOUNDARY));
+        $this->assertTrue($tokens[4]->is(Token::ENCLOSURE_TRIPLE_BOUNDARY));
+    }
+
     public function getTokenizeTestData()
     {
         return array(
@@ -46,17 +56,15 @@ class TokenizerTest extends \PHPUnit_Framework_TestCase
             array(
                 '~a~,~|~b|~~',
                 array(
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::CONTENT,            'a'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::SEPARATOR,          ','),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::ENCLOSURE_ESCAPE  , '|'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::CONTENT,            'b'),
-                    array(Token::ENCLOSURE_ESCAPE  , '|'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
+                    array(Token::CONTENT,                    'a'),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
+                    array(Token::SEPARATOR,                  ','),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
+                    array(Token::ENCLOSURE_ESCAPED_BOUNDARY, '|~'),
+                    array(Token::CONTENT,                    'b'),
+                    array(Token::ENCLOSURE_ESCAPED_BOUNDARY, '|~'),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
                 )
             ),
             array(

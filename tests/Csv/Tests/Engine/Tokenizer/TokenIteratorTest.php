@@ -48,17 +48,15 @@ class TokenIteratorTest extends \PHPUnit_Framework_TestCase
             array(
                 '~a~,~|~b|~~',
                 array(
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::CONTENT,            'a'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::SEPARATOR,          ','),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::ENCLOSURE_ESCAPE  , '|'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::CONTENT,            'b'),
-                    array(Token::ENCLOSURE_ESCAPE  , '|'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
-                    array(Token::ENCLOSURE_BOUNDARY, '~'),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
+                    array(Token::CONTENT,                    'a'),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
+                    array(Token::SEPARATOR,                  ','),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
+                    array(Token::ENCLOSURE_ESCAPED_BOUNDARY, '|~'),
+                    array(Token::CONTENT,                    'b'),
+                    array(Token::ENCLOSURE_ESCAPED_BOUNDARY, '|~'),
+                    array(Token::ENCLOSURE_BOUNDARY,         '~'),
                 )
             ),
         );

@@ -5,6 +5,7 @@ namespace Csv\Engine\Tokenizer;
 use Csv\Engine\WorkerIterator;
 use Csv\Resource\ReaderInterface;
 use Csv\Exception\ReadingFinishedException;
+use Csv\Engine\Enclosure;
 
 /**
  * Token iterator.
@@ -56,6 +57,14 @@ class TokenIterator extends WorkerIterator
     {
         array_shift($this->tokens);
         parent::next();
+    }
+
+    /**
+     * @return Enclosure|null
+     */
+    public function getEnclosure()
+    {
+        return $this->tokenizer->getEnclosure();
     }
 
     /**

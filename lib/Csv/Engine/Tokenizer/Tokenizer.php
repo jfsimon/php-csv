@@ -15,6 +15,11 @@ class Tokenizer
     private $matcher;
 
     /**
+     * @var Enclosure|null
+     */
+    private $enclosure;
+
+    /**
      * Constructor.
      *
      * @param string         $separator
@@ -32,14 +37,30 @@ class Tokenizer
         if (null !== $enclosure) {
             if ($enclosure->start === $enclosure->end) {
                 $types[$enclosure->start] = Token::ENCLOSURE_BOUNDARY;
+                $types[$enclosure->escape.$enclosure->start] = Token::ENCLOSURE_ESCAPED_BOUNDARY;
+
+                if ($enclosure->start === $enclosure->escape) {
+                    $types[str_repeat($enclosure->start, 3)] = Token::ENCLOSURE_TRIPLE_BOUNDARY;
+                }
             } else {
                 $types[$enclosure->start] = Token::ENCLOSURE_START;
+                $types[$enclosure->escape.$enclosure->start] = Token::ENCLOSURE_ESCAPED_START;
+
                 $types[$enclosure->end] = Token::ENCLOSURE_END;
+                $types[$enclosure->escape.$enclosure->end] = Token::ENCLOSURE_ESCAPED_END;
+
+                if ($enclosure->start === $enclosure->escape) {
+                    $types[str_repeat($enclosure->start, 3)] = Token::ENCLOSURE_TRIPLE_START;
+                }
+
+                if ($enclosure->end === $enclosure->escape) {
+                    $types[str_repeat($enclosure->end, 3)] = Token::ENCLOSURE_TRIPLE_END;
+                }
             }
-            $types[$enclosure->escape] = Token::ENCLOSURE_ESCAPE;
         }
 
-        $this->matcher = new Matcher($types);
+        $this->matcher   = new Matcher($types);
+        $this->enclosure = $enclosure;
     }
 
     /**
@@ -76,5 +97,13 @@ class Tokenizer
         }
 
         return $tokens;
+    }
+
+    /**
+     * @return Enclosure|null
+     */
+    public function getEnclosure()
+    {
+        return $this->enclosure;
     }
 }

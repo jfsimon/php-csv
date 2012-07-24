@@ -9,13 +9,25 @@ namespace Csv\Engine\Tokenizer;
  */
 class Token
 {
-    const CONTENT            = 0;
-    const ENCLOSURE_START    = 1;
-    const ENCLOSURE_END      = 2;
-    const ENCLOSURE_BOUNDARY = 3;
-    const ENCLOSURE_ESCAPE   = 4;
-    const SEPARATOR          = 5;
-    const LINE_BREAK         = 6;
+    // the basics
+    const CONTENT    = 1;
+    const SEPARATOR  = 2;
+    const LINE_BREAK = 3;
+
+    // simple enclosure
+    const ENCLOSURE_START    = 11;
+    const ENCLOSURE_END      = 12;
+    const ENCLOSURE_BOUNDARY = 13;
+
+    // escaped enclosure
+    const ENCLOSURE_ESCAPED_START    = 14;
+    const ENCLOSURE_ESCAPED_END      = 15;
+    const ENCLOSURE_ESCAPED_BOUNDARY = 16;
+
+    // enclosure special cases
+    const ENCLOSURE_TRIPLE_START    = 17;
+    const ENCLOSURE_TRIPLE_END      = 18;
+    const ENCLOSURE_TRIPLE_BOUNDARY = 19;
 
     /**
      * @var int
@@ -49,6 +61,10 @@ class Token
     public function is($type)
     {
         if (self::ENCLOSURE_BOUNDARY === $this->type && (self::ENCLOSURE_START === $type || self::ENCLOSURE_END === $type)) {
+            return true;
+        }
+
+        if (self::ENCLOSURE_ESCAPED_BOUNDARY === $this->type && (self::ENCLOSURE_ESCAPED_START === $type || self::ENCLOSURE_ESCAPED_END === $type)) {
             return true;
         }
 
