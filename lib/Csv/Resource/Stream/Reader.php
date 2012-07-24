@@ -46,7 +46,7 @@ class Reader extends Worker implements ReaderInterface
     /**
      * {@inheritdoc}
      */
-    public function readLine()
+    public function readLine($removeLineBreak = false)
     {
         if (null === $this->getResource() && $this->buffer->isEmpty()) {
             throw new ReadingFinishedException();
@@ -62,7 +62,9 @@ class Reader extends Worker implements ReaderInterface
             }
 
             if ($this->buffer->hasLineBreak()) {
-                return $this->buffer->readUntilLineBreak();
+                $line = $this->buffer->readUntilLineBreak();
+
+                return $removeLineBreak ? $line : $line.$this->buffer->getLastLineBreak();
             }
 
             if (null === $this->getResource()) {

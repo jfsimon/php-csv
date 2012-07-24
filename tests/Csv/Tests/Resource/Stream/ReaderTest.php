@@ -21,7 +21,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $reader->open($resource);
 
         foreach ($lines as $line) {
-            $this->assertEquals($line, $reader->readLine());
+            $this->assertEquals($line, $reader->readLine(true));
         }
 
         try {
@@ -41,6 +41,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             array("\n\n",                array('', '', '')),
             array("한국말\n조선말",        array('한국말', '조선말')),
             array("漢字\n汉字",           array('漢字', '汉字')),
+            array("a\nb\rc\r\nd",        array('a', 'b', 'c', 'd')),
+            array("a\nb\rc\r\nd",        array('a', 'b', 'c', 'd')),
         );
     }
 }
