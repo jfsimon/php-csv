@@ -3,6 +3,8 @@
 namespace Csv\Engine\Tokenizer;
 
 /**
+ * Matcher.
+ *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
 class Matcher
@@ -18,6 +20,8 @@ class Matcher
     private $matches;
 
     /**
+     * Constructor.
+     *
      * @param array $types
      */
     public function __construct(array $types)
@@ -27,6 +31,8 @@ class Matcher
     }
 
     /**
+     * Builds matches.
+     *
      * @param string $content
      */
     public function build($content)
@@ -50,6 +56,8 @@ class Matcher
     }
 
     /**
+     * Fetches next match.
+     *
      * @return array|null
      */
     public function fetch()
@@ -68,10 +76,12 @@ class Matcher
     }
 
     /**
-     * @param string $search
-     * @param string $content
+     * Find positions of search in content.
      *
-     * @return array
+     * @param string $search  String to search
+     * @param string $content Content to search in
+     *
+     * @return array An array of positions
      */
     private function find($search, $content)
     {

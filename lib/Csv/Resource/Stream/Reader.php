@@ -23,6 +23,8 @@ class Reader extends Worker implements ReaderInterface
     private $buffer;
 
     /**
+     * Constructor.
+     *
      * @param int    $chunkSize
      * @param string $lineBreak
      */

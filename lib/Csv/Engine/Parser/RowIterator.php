@@ -6,6 +6,8 @@ use Csv\Engine\WorkerIterator;
 use Csv\Exception\ParsingFinishedException;
 
 /**
+ * Row iterator.
+ *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
 class RowIterator extends WorkerIterator
@@ -21,6 +23,8 @@ class RowIterator extends WorkerIterator
     private $row;
 
     /**
+     * Constructor.
+     *
      * @param Parser $parser
      */
     public function __construct(Parser $parser)

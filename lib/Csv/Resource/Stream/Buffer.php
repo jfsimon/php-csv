@@ -37,6 +37,8 @@ class Buffer
     private $lbString;
 
     /**
+     * Constructor.
+     *
      * @param string|null $lineBreak
      */
     public function __construct($lineBreak = ReaderInterface::LB_AUTO)

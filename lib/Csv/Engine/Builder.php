@@ -22,6 +22,8 @@ class Builder
     private $enclosure;
 
     /**
+     * Constructor.
+     *
      * @param string         $separator
      * @param Enclosure|null $enclosure
      */
@@ -32,8 +34,10 @@ class Builder
     }
 
     /**
-     * @param array $values
-     * @param bool  $forceEnclosure
+     * Builds row with given values.
+     *
+     * @param array $values         Row values
+     * @param bool  $forceEnclosure Force enclosure
      *
      * @return string
      */

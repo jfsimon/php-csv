@@ -18,6 +18,8 @@ class Writer extends Worker implements WriterInterface
     private $lineBreak;
 
     /**
+     * Constructor.
+     *
      * @param string $lineBreak
      */
     public function __construct($lineBreak)

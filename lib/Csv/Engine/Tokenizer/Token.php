@@ -3,6 +3,8 @@
 namespace Csv\Engine\Tokenizer;
 
 /**
+ * Token.
+ *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
 class Token
@@ -26,6 +28,8 @@ class Token
     private $content;
 
     /**
+     * Constructor.
+     *
      * @param int    $type
      * @param string $content
      */
@@ -36,7 +40,9 @@ class Token
     }
 
     /**
-     * @param int $type
+     * Tests if token is given type.
+     *
+     * @param int $type Type to test
      *
      * @return bool
      */
@@ -50,6 +56,8 @@ class Token
     }
 
     /**
+     * Resturns token content.
+     *
      * @return string
      */
     public function getContent()

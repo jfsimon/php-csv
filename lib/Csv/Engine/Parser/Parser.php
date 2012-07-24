@@ -7,7 +7,7 @@ use Csv\Engine\Tokenizer\Token;
 use Csv\Exception\ParsingFinishedException;
 
 /**
- * Parser class.
+ * Parser.
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
@@ -19,6 +19,8 @@ class Parser
     private $tokens;
 
     /**
+     * Constructor.
+     *
      * @param TokenIterator $tokens
      */
     public function __construct(TokenIterator $tokens)
@@ -27,7 +29,7 @@ class Parser
     }
 
     /**
-     * Parses row.
+     * Parses next row.
      *
      * @param State $state
      *

@@ -25,6 +25,8 @@ class Enclosure
     public $escape;
 
     /**
+     * Constructor.
+     *
      * @param string      $start
      * @param string      $escape
      * @param string|null $end
@@ -37,9 +39,13 @@ class Enclosure
     }
 
     /**
-     * @param string $content
+     * Encloses content.
      *
-     * @return string
+     * @param string $content   Content to enclose
+     * @param array  $protected Strings to protect with enclosure
+     * @param bool   $force     Force enclosure
+     *
+     * @return string Enclosed content
      */
     public function enclose($content, array $protected, $force = false)
     {
@@ -54,9 +60,13 @@ class Enclosure
     }
 
     /**
-     * @param string $content
+     * Discloses content if needed.
      *
-     * @return string
+     * @param string $content Enclosed content
+     *
+     * @return string Disclosed content
+     *
+     * @throws \RuntimeException If closing boundary is escaped
      */
     public function disclose($content)
     {
@@ -74,10 +84,12 @@ class Enclosure
     }
 
     /**
-     * @param string $content
-     * @param array  $separators
+     * Defines whether content should be enclosed or not.
      *
-     * @return bool
+     * @param string $content   Content to enclose
+     * @param array  $protected Strings to protect
+     *
+     * @return bool True if content should be enclosed
      */
     private function shouldEnclose($content, array $protected)
     {

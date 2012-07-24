@@ -29,6 +29,8 @@ class TokenIterator extends WorkerIterator
     private $tokens;
 
     /**
+     * Constructor.
+     *
      * @param Tokenizer       $tokenizer
      * @param ReaderInterface $reader
      */

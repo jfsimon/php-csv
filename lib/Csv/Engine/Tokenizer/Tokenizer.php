@@ -15,6 +15,8 @@ class Tokenizer
     private $matcher;
 
     /**
+     * Constructor.
+     *
      * @param string         $separator
      * @param Enclosure|null $enclosure
      */
@@ -40,6 +42,13 @@ class Tokenizer
         $this->matcher = new Matcher($types);
     }
 
+    /**
+     * Tokenizes some content.
+     *
+     * @param string $string Content to tokenize
+     *
+     * @return array An array of tokens
+     */
     public function tokenize($string)
     {
         $tokens = array();

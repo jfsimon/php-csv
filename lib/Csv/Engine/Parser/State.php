@@ -3,6 +3,8 @@
 namespace Csv\Engine\Parser;
 
 /**
+ * Parser state.
+ *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
 class State
@@ -28,7 +30,7 @@ class State
     private $currentRow;
 
     /**
-     *
+     * Constructor.
      */
     public function __construct()
     {
@@ -39,6 +41,8 @@ class State
     }
 
     /**
+     * Writes "enclosed" state.
+     *
      * @param boolean $enclosed
      *
      * @return State
@@ -51,6 +55,8 @@ class State
     }
 
     /**
+     * Reads "enclosed" state.
+     *
      * @return boolean
      */
     public function isEnclosed()
@@ -59,6 +65,8 @@ class State
     }
 
     /**
+     * Writes "escaped" state.
+     *
      * @param boolean $escaped
      *
      * @return State
@@ -71,6 +79,8 @@ class State
     }
 
     /**
+     * Reads "escaped" state.
+     *
      * @return boolean
      */
     public function isEscaped()
@@ -79,6 +89,8 @@ class State
     }
 
     /**
+     * Adds content to current cell.
+     *
      * @param $content
      *
      * @return State
@@ -91,6 +103,8 @@ class State
     }
 
     /**
+     * Adds current cell to current row and creates a new cell.
+     *
      * @return State
      */
     public function nextCell()
@@ -102,6 +116,8 @@ class State
     }
 
     /**
+     * Fetches current row.
+     *
      * @return array
      */
     public function fetchRow()
