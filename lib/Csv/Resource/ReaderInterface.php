@@ -10,7 +10,7 @@ use Csv\Exception\ReadingFinishedException;
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-interface ReaderInterface extends ResourceInterface
+interface ReaderInterface extends WorkerInterface
 {
     const LB_AUTO = null;
 

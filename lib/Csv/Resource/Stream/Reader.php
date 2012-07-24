@@ -10,7 +10,7 @@ use Csv\Exception\ReadingFinishedException;
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class Reader extends Stream implements ReaderInterface
+class Reader extends Worker implements ReaderInterface
 {
     /**
      * @var int

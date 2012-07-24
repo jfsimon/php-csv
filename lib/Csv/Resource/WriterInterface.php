@@ -10,7 +10,7 @@ use Csv\Exception\ReadingFinishedException;
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-interface WriterInterface extends ResourceInterface
+interface WriterInterface extends WorkerInterface
 {
     /**
      * Writes content to resource and appends a line break.

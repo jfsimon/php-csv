@@ -10,7 +10,7 @@ use Csv\Exception\ResourceErrorException;
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class Writer extends Stream implements WriterInterface
+class Writer extends Worker implements WriterInterface
 {
     /**
      * @var string

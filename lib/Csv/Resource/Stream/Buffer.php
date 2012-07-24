@@ -5,7 +5,7 @@ namespace Csv\Resource\Stream;
 use Csv\Resource\ReaderInterface;
 
 /**
- * Stream content buffer.
+ * Resource
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
