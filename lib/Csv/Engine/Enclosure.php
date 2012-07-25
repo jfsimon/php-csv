@@ -49,9 +49,7 @@ class Enclosure
      */
     public function enclose($content, array $protected, $force = false)
     {
-        $protected[] = $this->start;
-        $protected[] = $this->end;
-
+        $protected = array_merge($protected, array("\r", "\n", "\r\n", $this->start, $this->end));
         if ($force || $this->shouldEnclose($content, array_unique($protected))) {
             return $this->start.str_replace($this->end, $this->escape.$this->end, $content).$this->end;
         }

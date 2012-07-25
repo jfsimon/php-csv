@@ -22,7 +22,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     {
         $reader = new Reader();
         $reader->open(fopen('data://text/plain;base64,'.base64_encode($content), 'r'));
-        $parser = new Parser(new TokenIterator(new Tokenizer(',', new Enclosure('~', '|')), $reader));
+        $parser = new Parser(new TokenIterator(new Tokenizer(',', new Enclosure('|')), $reader));
 
         $rowIndex = -1;
         foreach ($result as $rowIndex => $values) {
@@ -43,11 +43,12 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         return array(
             array(
                 "a,b,c\nd,e,f",
-                array(
-                    array('a', 'b', 'c'),
-                    array('d', 'e', 'f'),
-                )
+                array(array('a', 'b', 'c'), array('d', 'e', 'f'))
             ),
+            array(
+                "|a\nb|,|c\rd|,|e\r\nf|",
+                array(array("a\nb", "c\rd", "e\r\nf"))
+            )
         );
     }
 }
