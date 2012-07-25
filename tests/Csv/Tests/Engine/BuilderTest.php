@@ -2,7 +2,7 @@
 
 namespace Csv\Tests\Engine;
 
-use Csv\Engine\Builder;
+use Csv\Engine\Builder\Builder;
 use Csv\Engine\Enclosure;
 
 /**

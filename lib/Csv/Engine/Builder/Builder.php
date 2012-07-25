@@ -1,8 +1,8 @@
 <?php
 
-namespace Csv\Engine;
+namespace Csv\Engine\Builder;
 
-use Csv\Transformer\TransformerInterface;
+use Csv\Engine\Enclosure;
 
 /**
  * Row builder.
@@ -41,7 +41,7 @@ class Builder
      *
      * @return string
      */
-    public function build(array $values, $forceEnclosure = false)
+    public function build($values, $forceEnclosure = false)
     {
         $separator = $this->separator;
         if (null !== $enclosure = $this->enclosure) {

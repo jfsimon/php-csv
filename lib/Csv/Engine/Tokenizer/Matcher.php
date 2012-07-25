@@ -22,7 +22,7 @@ class Matcher
     /**
      * Constructor.
      *
-     * @param array $types
+     * @param array $types Token types.
      */
     public function __construct(array $types)
     {

@@ -22,44 +22,12 @@ class Tokenizer
     /**
      * Constructor.
      *
-     * @param string         $separator
+     * @param string|array   $separator
      * @param Enclosure|null $enclosure
      */
     public function __construct($separator, Enclosure $enclosure = null)
     {
-        $types = array(
-            "\r\n"     => Token::LINE_BREAK,
-            "\r"       => Token::LINE_BREAK,
-            "\n"       => Token::LINE_BREAK,
-            $separator => Token::SEPARATOR,
-        );
-
-        if (null !== $enclosure) {
-            if ($enclosure->start === $enclosure->end) {
-                $types[$enclosure->start] = Token::ENCLOSURE_BOUNDARY;
-                $types[$enclosure->escape.$enclosure->start] = Token::ENCLOSURE_ESCAPED_BOUNDARY;
-
-                if ($enclosure->start === $enclosure->escape) {
-                    $types[str_repeat($enclosure->start, 3)] = Token::ENCLOSURE_TRIPLE_BOUNDARY;
-                }
-            } else {
-                $types[$enclosure->start] = Token::ENCLOSURE_START;
-                $types[$enclosure->escape.$enclosure->start] = Token::ENCLOSURE_ESCAPED_START;
-
-                $types[$enclosure->end] = Token::ENCLOSURE_END;
-                $types[$enclosure->escape.$enclosure->end] = Token::ENCLOSURE_ESCAPED_END;
-
-                if ($enclosure->start === $enclosure->escape) {
-                    $types[str_repeat($enclosure->start, 3)] = Token::ENCLOSURE_TRIPLE_START;
-                }
-
-                if ($enclosure->end === $enclosure->escape) {
-                    $types[str_repeat($enclosure->end, 3)] = Token::ENCLOSURE_TRIPLE_END;
-                }
-            }
-        }
-
-        $this->matcher   = new Matcher($types);
+        $this->matcher   = new Matcher($this->buildTypes($separator, $enclosure));
         $this->enclosure = $enclosure;
     }
 
@@ -105,5 +73,57 @@ class Tokenizer
     public function getEnclosure()
     {
         return $this->enclosure;
+    }
+
+    /**
+     * Builds token types.
+     *
+     * @param string|array   $separator
+     * @param Enclosure|null $enclosure
+     *
+     * @return array
+     */
+    private function buildTypes($separator, Enclosure $enclosure = null)
+    {
+        $types = array(
+            "\r\n"     => Token::LINE_BREAK,
+            "\r"       => Token::LINE_BREAK,
+            "\n"       => Token::LINE_BREAK,
+        );
+
+        if (is_array($separator)) {
+            foreach ($separator as $string) {
+                $types[$string] = Token::SEPARATOR;
+            }
+        } else {
+            $types[$separator] = Token::SEPARATOR;
+        }
+
+        if (null !== $enclosure) {
+            if ($enclosure->start === $enclosure->end) {
+                $types[$enclosure->start] = Token::ENCLOSURE_BOUNDARY;
+                $types[$enclosure->escape.$enclosure->start] = Token::ENCLOSURE_ESCAPED_BOUNDARY;
+
+                if ($enclosure->start === $enclosure->escape) {
+                    $types[str_repeat($enclosure->start, 3)] = Token::ENCLOSURE_TRIPLE_BOUNDARY;
+                }
+            } else {
+                $types[$enclosure->start] = Token::ENCLOSURE_START;
+                $types[$enclosure->escape.$enclosure->start] = Token::ENCLOSURE_ESCAPED_START;
+
+                $types[$enclosure->end] = Token::ENCLOSURE_END;
+                $types[$enclosure->escape.$enclosure->end] = Token::ENCLOSURE_ESCAPED_END;
+
+                if ($enclosure->start === $enclosure->escape) {
+                    $types[str_repeat($enclosure->start, 3)] = Token::ENCLOSURE_TRIPLE_START;
+                }
+
+                if ($enclosure->end === $enclosure->escape) {
+                    $types[str_repeat($enclosure->end, 3)] = Token::ENCLOSURE_TRIPLE_END;
+                }
+            }
+        }
+
+        return $types;
     }
 }

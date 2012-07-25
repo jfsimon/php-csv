@@ -2,6 +2,7 @@
 
 namespace Csv\Engine\Parser;
 
+use Csv\Engine\ParserInterface;
 use Csv\Engine\Tokenizer\TokenIterator;
 use Csv\Engine\Tokenizer\Token;
 use Csv\Engine\Enclosure;
@@ -12,7 +13,7 @@ use Csv\Exception\ParsingFinishedException;
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class Parser
+class Parser implements ParserInterface
 {
     /**
      * @var TokenIterator
@@ -30,13 +31,7 @@ class Parser
     }
 
     /**
-     * Parses next row.
-     *
-     * @param State $state
-     *
-     * @return array Parsed row
-     *
-     * @throws ParsingFinishedException
+     * {@inheritdoc}
      */
     public function parse(State $state)
     {
