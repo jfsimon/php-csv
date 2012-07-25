@@ -9,6 +9,16 @@
          processIsolation="true"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="bootstrap.php"
+         bootstrap="tests/bootstrap.php"
 >
+    <testsuites>
+        <testsuite name="Csv Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./src/Csv/</directory>
+        </whitelist>
+    </filter>
 </phpunit>
